@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embed Google map page</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css"
+        href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+</head>
+
+<body>
+    <div id="Map" style="position:relative;width:600px;height:400px;margin: 0 auto"></div>
+
+    <script>
+        (function ($) {
+            var params = [];
+            location.search.substr(1).split("&").forEach((i) => { let x = i.split("="); params[x[0]] = x[1]; })
+
+            const _s = String(params['s']);
+            const _ic = String(params['ic']);
+            const _z = parseInt(params['zoom']);
+            let _width = parseInt(params['width']);
+            let _height = parseInt(params['height']);
+            let _type = String(params['type']);
+
+            var urlAPI = `https://api.tomtom.com/search/2/search/`;
+
+            $.getJSON(urlAPI + _s + _type + '?key=CImlF5L7FzR4cf8K9epGjwwXwn1MLAcm', function (json) {
+
+            })
+                .done(function (data) {
+                    var map = tt.map({
+                        key: "CImlF5L7FzR4cf8K9epGjwwXwn1MLAcm",
+                        container: "Map",
+                        center: [data.results[0].position.lon, data.results[0].position.lat],
+                        zoom: 13,
+                        language: 'en-US',
+                        style: 'https://api.tomtom.com/style/1/style/22.2.1-9?key=CImlF5L7FzR4cf8K9epGjwwXwn1MLAcm&map=basic_main'
+                    })
+
+                    var marker = new tt.Marker()
+                        .setLngLat([data.results[0].position.lon, data.results[0].position.lat])
+                        .addTo(map);
+
+                    $("#myMap").attr("width", _width)
+                        .attr("height", _height)
+                        .appendTo('#Map');
+                    console.log(data)
+                })
+        })(jQuery)
+    </script>
+</body>
+
+</html>
