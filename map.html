@@ -37,7 +37,7 @@
             var urlAPI = `https://api.tomtom.com/search/2/search/`;
 
             $.getJSON(urlAPI + _s + _type + '?key=CImlF5L7FzR4cf8K9epGjwwXwn1MLAcm', function (data) {
-                console.info(data);
+                console.info([data.results[0].position.lon, data.results[0].position.lat]);
                     var map = tt.map({
                         key: "CImlF5L7FzR4cf8K9epGjwwXwn1MLAcm",
                         container: "Map",
