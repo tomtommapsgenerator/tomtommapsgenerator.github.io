@@ -14,10 +14,8 @@
     </style>
     <link rel="stylesheet" type="text/css"
         href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
-    <link rel="stylesheet" type="text/css"
-        href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
-    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps-web.min.js"></script>
 </head>
 
 <body>
@@ -34,16 +32,12 @@
             let _width = parseInt(params['width']);
             let _height = parseInt(params['height']);
             let _type = String(params['type']);
+            var _maptype = _ic==1?'basic_main':'2/basic_street-satellite';
             $("#Map").css("width", _width+'px').css("height", _height+'px');
 
             var urlAPI = `https://api.tomtom.com/search/2/search/`;
 
-            $.getJSON(urlAPI + _s + _type + '?key=CImlF5L7FzR4cf8K9epGjwwXwn1MLAcm', function (json) {
-
-            })
-                .done(function (data) {
-
-                    var _maptype = _ic==1?'basic_main':'2/basic_street-satellite';
+            $.getJSON(urlAPI + _s + _type + '?key=CImlF5L7FzR4cf8K9epGjwwXwn1MLAcm', function (data) {
                     var map = tt.map({
                         key: "CImlF5L7FzR4cf8K9epGjwwXwn1MLAcm",
                         container: "Map",
