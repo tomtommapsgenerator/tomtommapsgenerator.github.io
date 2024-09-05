@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <div id="Map" style="position:relative;width:600px;height:400px;margin: 0 auto"></div>
+    <div id="Map" style="position:relative;max-width:100%;margin: 0 auto"></div>
 
     <script>
         (function ($) {
@@ -34,6 +34,7 @@
             let _width = parseInt(params['width']);
             let _height = parseInt(params['height']);
             let _type = String(params['type']);
+            $("#Map").css("width", _width+'px').css("height", _height+'px');
 
             var urlAPI = `https://api.tomtom.com/search/2/search/`;
 
@@ -41,12 +42,13 @@
 
             })
                 .done(function (data) {
+
                     var _maptype = _ic==1?'basic_main':'2/basic_street-satellite';
                     var map = tt.map({
                         key: "CImlF5L7FzR4cf8K9epGjwwXwn1MLAcm",
                         container: "Map",
                         center: [data.results[0].position.lon, data.results[0].position.lat],
-                        zoom: 13,
+                        zoom: _z,
                         language: 'en-US',
                         style: 'https://api.tomtom.com/style/1/style/22.2.1-9?key=CImlF5L7FzR4cf8K9epGjwwXwn1MLAcm&map='+_maptype
                     })
@@ -55,9 +57,6 @@
                         .setLngLat([data.results[0].position.lon, data.results[0].position.lat])
                         .addTo(map);
 
-                    $("#Map").css("width", _width)
-                        .css("height", _height)
-                        .appendTo('#Map');
                     //console.log(data)
                 })
         })(jQuery)
