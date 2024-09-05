@@ -41,20 +41,21 @@
 
             })
                 .done(function (data) {
+                    var _maptype = _ic==1?'basic_main':'2/basic_street-satellite';
                     var map = tt.map({
                         key: "CImlF5L7FzR4cf8K9epGjwwXwn1MLAcm",
                         container: "Map",
                         center: [data.results[0].position.lon, data.results[0].position.lat],
                         zoom: 13,
                         language: 'en-US',
-                        style: 'https://api.tomtom.com/style/1/style/22.2.1-9?key=CImlF5L7FzR4cf8K9epGjwwXwn1MLAcm&map=basic_main'
+                        style: 'https://api.tomtom.com/style/1/style/22.2.1-9?key=CImlF5L7FzR4cf8K9epGjwwXwn1MLAcm&map='+_maptype
                     })
 
                     var marker = new tt.Marker()
                         .setLngLat([data.results[0].position.lon, data.results[0].position.lat])
                         .addTo(map);
 
-                    $("#myMap").attr("width", _width)
+                    $("#Map").attr("width", _width)
                         .attr("height", _height)
                         .appendTo('#Map');
                     console.log(data)
