@@ -55,10 +55,10 @@
                         .setLngLat([data.results[0].position.lon, data.results[0].position.lat])
                         .addTo(map);
 
-                    $("#Map").attr("width", _width)
-                        .attr("height", _height)
+                    $("#Map").css("width", _width)
+                        .css("height", _height)
                         .appendTo('#Map');
-                    console.log(data)
+                    //console.log(data)
                 })
         })(jQuery)
     </script>
